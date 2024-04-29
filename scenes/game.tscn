@@ -6,10 +6,10 @@
 
 [node name="Game" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_thnap")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
+
+[node name="Player" parent="." instance=ExtResource("1_thnap")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 5)
