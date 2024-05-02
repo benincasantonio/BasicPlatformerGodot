@@ -16,14 +16,15 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
+	var direction = Input.get_axis("move_left", "move_right")
 	
-	_set_character_direction(direction)
+	_set_player_direction(direction)
+	_set_player_animation(direction)
 		
 	if direction:
 		velocity.x = direction * SPEED
@@ -33,8 +34,17 @@ func _physics_process(delta):
 	move_and_slide()
 	
 
-func _set_character_direction(direction: float) -> void:
+func _set_player_direction(direction: float) -> void:
 	if direction < 0:
-		sprite.scale = Vector2(-1, 1)	
+		sprite.flip_h = true
 	elif direction > 0: 
-		sprite.scale = Vector2(1,1) 
+		sprite.flip_h = false 
+		
+func _set_player_animation(direction: float) -> void:
+	if is_on_floor():
+		if direction == 0:
+			sprite.play("idle")
+		else:
+			sprite.play("run")
+	else: 
+		sprite.play("jump")

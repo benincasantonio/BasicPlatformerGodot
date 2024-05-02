@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://ek4dds14ljdd"]
+
+[ext_resource type="Script" path="res://levels/main_menu.gd" id="1_3bdov"]
+
+[sub_resource type="Theme" id="Theme_kdohk"]
+
+[sub_resource type="Theme" id="Theme_jm7yd"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_3bdov")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -20.0
+offset_right = 20.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="CanvasLayer/ButtonsContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = SubResource("Theme_kdohk")
+text = "Play
+"
+
+[node name="Quit" type="Button" parent="CanvasLayer/ButtonsContainer"]
+layout_mode = 2
+theme = SubResource("Theme_jm7yd")
+text = "Quit
+"
+
+[connection signal="pressed" from="CanvasLayer/ButtonsContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="focus_entered" from="CanvasLayer/ButtonsContainer/Quit" to="." method="_on_quit_focus_entered"]
+[connection signal="pressed" from="CanvasLayer/ButtonsContainer/Quit" to="." method="_on_quit_pressed"]
